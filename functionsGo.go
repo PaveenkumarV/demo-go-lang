@@ -30,6 +30,4 @@ func main(){
 	fmt.Println("The Sum Of Given Two Numbers Are: ", result);
 	fmt.Println("The calculation Of Given Two Numbers Are: ", calcResult1 , calcResult2);
 	fmt.Println("The Multiple, Divide Of Given Two Numbers Are: ", calcMD1 , calcMD2);
-	fmt.Println("Bye");
-	fmt.Println("Okay. Tc");
 }
