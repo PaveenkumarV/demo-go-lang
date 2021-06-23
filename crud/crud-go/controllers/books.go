@@ -20,21 +20,21 @@ type UpdateBookInput struct {
 }
 
 func CreateBook(c *gin.Context) {
-	// Validate input
+	// Validateing the input
 	var input CreateBookInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	// Create book
+	// Createing book
 	book := models.Book{Title: input.Title, Author: input.Author}
 	models.DB.Create(&book)
 
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
-func FindBook(c *gin.Context) { // Get model if exist
+func FindBook(c *gin.Context) { // Getting the model if exist
 	var book models.Book
 
 	if err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
@@ -45,7 +45,6 @@ func FindBook(c *gin.Context) { // Get model if exist
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
-// GET /books
 // Get all books
 func FindBooks(c *gin.Context) {
 	var books []models.Book
@@ -55,14 +54,14 @@ func FindBooks(c *gin.Context) {
 }
 
 func UpdateBook(c *gin.Context) {
-	// Get model if exist
+
 	var book models.Book
-	if err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
+	if err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error; err != nil { // Getmodel ifexist
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
 		return
 	}
 
-	// Validate input
+	// Validating the input
 	var input UpdateBookInput
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -74,9 +73,9 @@ func UpdateBook(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": book})
 }
 
-// Delete a book
+// Deleteing a book
 func DeleteBook(c *gin.Context) {
-	// Get model if exist
+	// Getting model if exist
 	var book models.Book
 	if err := models.DB.Where("id = ?", c.Param("id")).First(&book).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
@@ -85,5 +84,5 @@ func DeleteBook(c *gin.Context) {
 
 	models.DB.Delete(&book)
 
-	c.JSON(http.StatusOK, gin.H{"data": true})
+	c.JSON(http.StatusOK, gin.H{"data Deleted": book})
 }
