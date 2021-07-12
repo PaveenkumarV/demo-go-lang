@@ -145,7 +145,7 @@ func Login(c *gin.Context) {
 	}
 
 	// Storing In cookies
-	c.SetCookie("jwt", token, 3600000, "/", "localhost", false, true)
+	c.SetCookie("jwt", token, 3600, "/", "localhost", false, true)
 	c.JSON(http.StatusAccepted, gin.H{
 		"message": "Logged In successfully",
 	})
